@@ -1,0 +1,9 @@
+<html>
+    <body>
+        <img src="/images/iiitk.png" style="height: 50%; width: 30%;">
+           <p style="font-size:50px; text-align: right;">Online College Magazine</p></img>
+               <img src="/images/asdf.jpg" style="height: 40%; width: 100%;"></img> 
+         
+        
+        </body>
+</html>

@@ -1,0 +1,57 @@
+<head>
+    <link rel="shortcut icon" type="image/png" href="logo.png"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"><title></title>
+<style>
+    .logo {
+          padding-top: 1.5%;
+          left: 5%;
+          max-width: 8%;
+          position:absolute;
+        }
+        .text {
+          color: black;
+          font-size: 70px;
+          left:15%;
+          position: absolute;
+          top: 5%;
+          text-align: left;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          
+        }
+        .head1{
+            color: black;
+          font-size: 25px;
+          left:10%;
+          position: absolute;
+          top: 25%;
+          text-align: left;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        }
+        .head2{
+            color: black;
+          font-size: 15px;
+          right:20%;
+          position: absolute;
+          top: 35%;
+          text-align: right;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        }
+        .body1{color: black;
+          font-size: 25px;
+          left:10%;
+          right:10%;
+          position: absolute;
+          top: 45%;
+          text-align: left;
+          font-family: 'times new roman'; 
+        
+
+        }
+</style>
+</head>
+<body>
+        <div class="top "><img src='logo.png' class="logo">   <div class="text">IIITK Magazine Portal</div></div>
+        <div class="head1"><h1><%= title %></h1></div>
+        <div class="head2"><h2>By- <%= author %> </h2></div>
+        <div class="body1"><p> <%= data %> </p></div>
+</body>

@@ -31,7 +31,7 @@ app.use(express.static("assets"));
 app.use(bodyParser.json())
 
 app.get('/', function (req, res) {
-    res.render('home', { name: student })
+    res.render('home_1', { name: student })
     res.end()
 })
 app.get('/home', function (req, res) {
@@ -39,21 +39,22 @@ app.get('/home', function (req, res) {
 })
 
 
-app.get('/admin', function (req, res) {
-    res.render('admin', { data: 'Admin Login' })
+app.get('/templet.html', function (req, res) {
+    res.render('templet', { title:'test', author: 'Chemboy',data: 'Admin Login' })
 })
 
 app.post('/admin_check', function (req, res) {
     console.log(req.body);
 
-    con.query("select pwd from admin where username = ?",[req.body.Username], function(err, result, fields){
+    con.query("select pwd from admin where username = ?",[req.body.uname], function(err, result, fields){
         // console.log(result.length)
         if (err) throw err;
-        if (result.length == 0){
-            res.redirect('/admin')
+        if (result[0].pwd == req.body.pwd){
+            student = req.body.uname
+            console.log("logged in")
+            res.redirect('/')
         }
         else{
-            student = req.body.Username
             res.redirect('/')
         }
 
@@ -67,14 +68,14 @@ app.get('/student', function (req, res) {
 
 app.post('/student_check', function (req, res) {
     // sql = `select pwd from student where username = ${req.body.username};`
-    con.query('select pwd from student where username = ?;', [req.body.username], function(err, result, fields){
-        console.log(result[0].pwd == req.body.pwd)
+    con.query('select pwd from student where username = ?;', [req.body.uname], function(err, result, fields){
         if (result[0].pwd == req.body.pwd){
-            student = req.body.username
+            student = req.body.uname
+            console.log("logged in")
             res.redirect('/')
         }
         else{
-            res.redirect('/student')
+            res.redirect('/')
         }
     })
 })
@@ -90,22 +91,23 @@ app.get('/upload', function (req, res) {
 })
 
 
-app.get('/stureg', function (req, res) {
-    res.render('studentreg')
-})
+// app.get('/stureg', function (req, res) {
+//     res.render('studentreg')
+// })
 
 app.post('/reg', function (req, res) {
     console.log(req.body);
     
-    const {username,pwd,contact,email,address,dob} = req.body
+    const {username,pwd,contact} = req.body
     // sql = `insert into student values (${req.body.username}, ${req.body.pwd}, ${req.body.contact}, ${req.body.email}, ${req.body.address}, ${req.body.dob});`
-    con.query('insert into student values (?, ?, ?, ?, ?, ?);',[username,pwd,contact,email,address,dob] , function (err) {
+    con.query('insert into student values (?, ?, ?);',[username,pwd,contact] , function (err) {
         if (err) {
             throw err;
-            res.redirect('/registration')
+            res.redirect('/')
         }
         else{
-            res.redirect('/student')
+            student=req.body.username
+            res.redirect('/')
         }
     })
 })

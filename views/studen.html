@@ -1,0 +1,90 @@
+<!-- views/post.ejs -->
+<html>
+  <head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<style>
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 8px 8px;
+    text-decoration: none;
+  }
+  
+  li a:hover:not(.active) {
+    background-color: #111;
+  }
+  
+  .active {
+    background-color: #4CAF50;
+    }
+  #pl
+  {
+  width:100%;
+  height:30%;
+  }
+  h1
+  {
+  text-align:center;
+  }
+  </style>
+  </head>
+  
+  <body>
+  <div >
+  <h1>Online College Magazine</h1>
+  </div>
+  <ul>
+    <li><a href="home"><h3>Home</h3></a></li>
+    <li><a  href="admin"><h3>admin</h3></a></li>
+    <li><a class="active"><h3>student</h3></a></li>
+    <li><a href="#about"><h3>upload</h3></a></li>
+  </ul>
+  
+  <img src="/images/iiitkota.jpg" width="1365" heigth="100">
+<div class="id2">
+<div class="container">
+  <h1 text-align= "center"> Student login </h1>
+  
+  <form class="form-horizontal" action="student_check" method="POST">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="username">username:</label>
+      <div class="col-sm-5">         
+        <input type="text" class="form-control" id="txt" placeholder="Enter username" name="hello">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">Password:</label>
+      <div class="col-sm-5">          
+        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="s_p">
+      </div>
+    </div>
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-2">
+        <input type="submit">
+        <button type="submit" class="btn btn-default">Submit</button>
+      </div>
+    </div>
+  </form>
+  <a href="stureg">Sign up!</a>
+</div>
+</body>
+</html>

@@ -20,6 +20,11 @@ app.use( express.static( "assets" ) );
 
 app.get('/',function(req, res){
     res.render('home')
+    res.end()
+})
+
+app.get('/home',function(req, res){
+    res.render('home')
 })
 
 // app.get('/student_login',function(req, res){
@@ -36,9 +41,9 @@ app.get('/',function(req, res){
 
 
 
-// app.get('/admin_login', function(req, res){
-
-// })
+app.get('/admin', function(req, res){
+    res.render('admin',{data: 'Admin Login'})
+})
 
 // app.post('/student_check', function(req, res){
 //     sql = `select pwd from student where username = ${req.body.username}`

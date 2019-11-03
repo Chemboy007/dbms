@@ -1,124 +1,79 @@
-
-<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
-<style media="screen">
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-}
-
-li {
-  float: left;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 8px 8px;
-  text-decoration: none;
-}
-
-li a:hover:not(.active) {
-  background-color: #111;
-}
-
-.active {
+<head>
+    <link rel="shortcut icon" type="image/png" href="logo.png"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"><title></title>
+<style>
+    .logo {
+          padding-top: 1.5%;
+          left: 5%;
+          max-width: 8%;
+          position:absolute;
+        }
+        .text {
+          color: black;
+          font-size: 70px;
+          left:15%;
+          position: absolute;
+          top: 5%;
+          text-align: left;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          
+        }
+        .head1{
+            color: black;
+          font-size: 25px;
+          left:10%;
+          position: absolute;
+          top: 25%;
+          text-align: left;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        }
+        .head2{
+            color: black;
+          font-size: 15px;
+          right:40%;
+          position: absolute;
+          top: 38%;
+          text-align: right;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        }
+        .body1{color: black;
+          font-size: 25px;
+          left:10%;
+          right:10%;
+          position: absolute;
+          top: 45%;
+          text-align: left;
+          font-family: 'times new roman'; 
+        }
+          .button {
   background-color: #4CAF50;
+  color: white;
+  padding: 10px 18px;
+  margin-top: 650px ;
+  margin-left:250px;
+  border: none;
+  cursor: pointer;
+  width: 60%;
+  opacity: 0.9;
 }
-#pl
-{
-width:100%;
-height:30%;
-}
-h1
-{
-text-align:center;
-}
-#custom-button {
-padding: 10px;
-color:white;
-background-color:#009578;
-border: 1px solid #000;
-cursor: pointer;
-}
-#custom-button:hover
-{
-background-color:#00b28f;
-}
-#custom-text{
-margin-left: 10px;
-font-family:sans-serif;
-color:#aaa;
-}
+
+button:hover {
+  opacity:0.8;
+
+        }
 </style>
-<div >
-<h1>Online College Magazine</h1>
-</div>
-<ul>
-  <li><a class="active" href="#home"><h3>Home</h3></a></li>
-  <li><a href="#news"><h3>admin</h3></a></li>
-  <li><a href="#contact"><h3>student</h3></a></li>
-  <li><a href="#about"><h3>upload</h3></a></li>
-</ul>
-
-<img src="/images/iiitkota.jpg" width="1800" heigth="100">
-<div class="id2">
-<div class="container">
-  <h1 text-align="center">Upload Magazine</h1>
-  <form class="form-horizontal" action="/action_page">
-    <div class="form-group">
-      <label class="control-label col-sm-2" for=" name"> Article  Name:</label>
-      <div class="col-sm-5">         
-        <input type="text" class="form-control" id="txt" placeholder=" name" name="txt">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2"  for="description">Description:</label>
-      <div class="col-sm-5">          
-        <input type="text" class="form-control" id="txt" placeholder="Enter description" name="des">
-      </div>
-      </div>
-    <div class="form-group"> 
-     <label class="control-label col-sm-2" for="select">Select article:</label> 
-       <input type="file" name="choose a file" id="real-file" hidden="hidden" />
-
-      <button type="button" id="custom-button">CHOOSE A FILE</button>
-     <span id="custom-text">No file chosen, yet.</span>
-    <script>
-    const realFileBtn = document.getElementById("real-file");
-    const customBtn = document.getElementById("custom-button");
-     const customTxt = document.getElementById("custom-text");
-
-customBtn.addEventListener("click", function() {
-  realFileBtn.click();
-});
-
-realFileBtn.addEventListener("change", function() {
-  if (realFileBtn.value) {
-    customTxt.innerHTML = realFileBtn.value.match(
-      /[\/\\]([\w\d\s\.\-\(\)]+)$/
-    )[1];
-  } else {
-    customTxt.innerHTML = "No file chosen, yet.";
-  }
-});
-</script>
-
-</div> 
-
-      
-    <div class="form-group"> 
-   <div class="col-sm-offset-2 col-sm-2">
- <button type="submit" class="btn btn-default">upload</button>
-</div>
-</div>
-  </form>
-</div>
+</head>
+<body>
+        <div class="top "><img src='/images/logotry.png' class="logo">   <div class="text">IIITK Magazine Portal</div></div>
+        <form action="data" method="POST">
+        <div class="head1"><h1>Title of the Composition:</h1></div><input type="text" name="title" style="border-radius:10px; border-block-width: 5px; width:370px;margin-left: 720px;margin-top:210px; height: 30px" >
+        <div class="head2"><h2>By <%= name%></h2></div>
+        <!-- <input type="text" name="writer"style="border-radius:8px; border-block-width: 3px; width:300px;margin-left: 810px;margin-top:20px; height: 18px"> -->
+        <div class="body1"><p><textarea placeholder="Feel free to express yourself ............................." rows="25" cols="110"style="font-family: times new roman; font-size:20px" name="text">
+          
+          </textarea></div><div>
+              <input type="submit" value="Submit"class="button">
+          </form>
+          </div>
+          
+</body>

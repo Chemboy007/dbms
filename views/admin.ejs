@@ -1,84 +1,337 @@
-<!-- views/post.ejs -->
-
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  
+<head>
+    <link rel="shortcut icon" type="image/png" href="logo.png"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>IIITK Magazine Portal</title>
 <style>
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-  }
+        * {box-sizing: border-box}
+        body {font-family: Verdana, sans-serif; margin:0}
+        .mySlides {display: none;}
+        img {vertical-align: middle;}
+        .backimage{
+            height: 100vh;object-fit:cover; filter: brightness(70%)
+        }
+        .slideshow-container {
+            background-color: #141f1f;
+          position: center;
+          margin: auto;
+        }
+        a:link, a:visited {
+  color: black; 
+  text-decoration: none;
+}
+
+a:hover, a:active {
+  color:#686464;
   
-  li {
-    float: left;
+}
+.img1:hover{
+ opacity: 0.5;
+}
+
+        div.polaroid {  height: 250px;
+        width: 70%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        text-align: left;
+        padding: 10px;
+        margin:4%;
+        margin-left: auto;
+          margin-right: auto;
+        }
+        
+        div.container { margin:20%;
+        padding: 10px;
+        }
+
+        #head{margin-top: 12%;
+          font-size: 60px;
+          text-align: center;
+          font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+          color:#333333;
+        }
+        #red{border: 2px solid red;
+          margin-top: -2.5%;
+         margin-left: auto;
+          margin-right: auto;
+          width: 100px;
+          border-radius:2px;
+        }
+        #inf{margin: 10%;
+        margin-top: 5%;
+        margin-bottom: 12%;
+          font-size: 25px;
+          text-align: center;
+          font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+          color:#808080;
+          line-height:140%;
+        }
+        .head-box{position: absolute;display: block;
+        margin-top:-12%;
+        margin-left:25%;
+          font-size: 200%;
+        }
+        .body-box{position: absolute;display: block;
+        margin-top:-7%;
+        margin-left:25%;
+        margin-right:20%
+        }
+        .text {
+          color: #ffffff;
+          font-size: 70px;
+          left:10%;
+          position: absolute;
+          top: 50%;
+          text-align: left;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          
+        }
+        .text1 {
+          color: #ffffff;
+          font-size: 30px;
+          left:10%;
+          position: absolute;
+          top: 65%;
+          text-align: left;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          right:10%;
+        }
+        
+        .logo {
+          padding-top: 1.5%;
+          left: 46%;
+          height: 100px;
+          width: 200px;
+          /* max-width: 8%; */
+          position:absolute;
+        }
+        .zoom {
+          animation-name: fade;
+          animation-duration: 2.5s;
+        }
+        input[type=text], input[type=password] {
+          width: 100%;
+          padding: 15px;
+          margin: 5px 0 22px 0;
+          display: inline-block;
+          border: none;
+          background: #f1f1f1;
+        }
+        input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+        button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 18px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #474e5d;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 45%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+ 
+/* The Close Button (x) */
+.close1 {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close1:hover,
+.close1:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+     width: 100%;
   }
-  
-  li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 8px 8px;
-    text-decoration: none;
-  }
-  
-  li a:hover:not(.active) {
-    background-color: #111;
-  }
-  
-  .active {
-    background-color: #4CAF50;
+}
+        @keyframes fade {
+    from {
+        opacity: 0.3;
     }
-  #pl
-  {
-  width:100%;
-  height:30%;
-  }
-  h1
-  {
-  text-align:center;
-  }
-  </style>
+    to {
+        opacity: 1;
+    }
+}
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
   
-  <div >
-  <h1>Online College Magazine</h1>
-  </div>
-  <ul>
-    <li><a href="home"><h3>Home</h3></a></li>
-    <li><a class="active" href="#news"><h3>admin</h3></a></li>
-    <li><a href="student"><h3>student</h3></a></li>
-    <li><a href="#about"><h3>upload</h3></a></li>
-  </ul>
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+    
+</style>
+</head>
+<body>
+       
+  <div class="slideshow-container">
+    <div class="mySlides ">      <img src="/images/1.jpg" style="width:100%" class='backimage zoom'><img src='/images/logotry.png' class="logo">   <div class="text">IIITK Magazine Portal</div><div class="text1"><p>This portal is exclusively fabricated for encourging the young but enthusiatic poets and writers of IIITk.</p></div> </div>
+    <div class="mySlides ">      <img src="/images/2.jpg" style="width:100%" class='backimage zoom'><img src='/images/logotry.png' class="logo">   <div class="text">IIITK Magazine Portal</div><div class="text1"><p>This portal is exclusively fabricated for encourging the young but enthusiatic poets and writers of IIITk.</p></div> </div>
+    <div class="mySlides ">      <img src="/images/3.jpg" style="width:100%" class='backimage zoom'><img src='/images/logotry.png' class="logo">   <div class="text">IIITK Magazine Portal</div><div class="text1"><p>This portal is exclusively fabricated for encourging the young but enthusiatic poets and writers of IIITk.</p></div> </div>
+    <div class="mySlides ">      <img src="/images/4.jpg" style="width:100%" class='backimage zoom'><img src='/images/logotry.png' class="logo">   <div class="text">IIITK Magazine Portal</div><div class="text1"><p>This portal is exclusively fabricated for encourging the young but enthusiatic poets and writers of IIITk.</p></div> </div>
+    
+    </div>
+<div>
+    
+    <a href="approve.html"><button document.g style="width:auto;margin-left:280px;margin-top:50px;margin-right:280px;padding: 30px;">Approve</button></a>
+    <a href="logout"><button onclick="document.getElementById('id01').style.display='block'" style="width:auto;margin-left:280px;margin-right:160px;margin-top:70;padding: 30px">Logout</button></a>
   
-  <img src="/images/iiitkota.jpg" width="1365" heigth="100">
-<div class="id2">
-<div class="container">
-  <h1 text-align="center"> Admin Login </h1>
 
-  <form class="form-horizontal" action="admin_check" method="POST">
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="username">username:</label>
-      <div class="col-sm-5">         
-        <input type="text" class="form-control" placeholder="Enter username" name="Username">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="pwd">Password:</label>
-      <div class="col-sm-5">          
-        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
-      </div>
-    </div>
-    <div class="form-group">        
-      <div class="col-sm-offset-2 col-sm-2">
-        <button type="submit" class="btn btn-default">Submit</button>
-      </div>
-    </div>
-  </form>
-
+    <h2 id='head' style='padding-top:'>Our Aspiration</h2><hr id='red'><p id='inf'>Our Portal is fabricated keeping in mind a open space for the creative birds to articulate their thoughts and emotions. Students of IIITK are free to submit poem, proses, shayari, other literary compositions to this portal.  This portal will be weekly regulated by the person in charge. For more query contact us. </p>
 </div>
+<div>
+  <h2 id='head'>Explore</h2><hr id='red'><br>
+</div>
+<div>
+  <a href="sample1.html"><div class="polaroid "><img src="/images/5.jpg" class="img1" alt="theme" height="100%" width="30%" style='object-fit:cover'><h2 class="head-box"><%= title1%></h2><p class="body-box">By- <%= author1%></p>
+     </div></a>
+  <a href="sample2.html"><div class="polaroid "><img src="/images/5.jpg" class="img1" alt="theme" height="100%" width="30%" style='object-fit:cover'><h2 class="head-box"><%= title2%></h2><p class="body-box">By- <%= author2%></p>
+     </div></a>
+     <a href="#"><div class="polaroid "><img src="/images/Title-ComingSoon.png" class="img1" alt="theme" height="100%" width="30%" style='object-fit:fill'>
+      <h2 class="head-box">Coming Soon ......</h2>
+      <p class="body-box">Articles will be added soon.......</p>
+     </div></a>
+</div>
+<div>
+    <h2 id='head'>Contact Us</h2><hr id='red'><br><p id='inf'>E-mail: onlinejournal@iiitkota.com<br></p>
+</div>
+
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex-1].style.display = "block";  
+  setTimeout(showSlides, 7000);
+}
+
+
+// When the user clicks anywhere outside of the modal, close it
+
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+</body>

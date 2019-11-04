@@ -2,7 +2,7 @@ var mysql = require('mysql')
 var express = require('express')
 var app = express()
 var path = require('path')
-var student = "Guest"
+var student = "Guest",admin =null
 var bodyParser = require('body-parser')
 
 
@@ -35,7 +35,7 @@ var t2,a1,a2,txt1,txt2
 
 
 app.get('/', function (req, res) {
-    con.query('select * from article where art_no order by art_no desc limit 2;',function(err, result, fields){
+    con.query('select * from article where status = "app" order by art_no desc limit 2;',function(err, result, fields){
         
         const obj = JSON.parse(JSON.stringify(result))
         t1 = obj[0].title
@@ -55,6 +55,7 @@ app.get('/', function (req, res) {
 
 app.get('/logout', function (req, res){
     student = "Guest"
+    admin = null
     res.redirect('/')
 })
 
@@ -66,20 +67,26 @@ app.get('/home', function (req, res) {
 
 
 app.get('/admin',function (req, res){
-    con.query('select * from article where art_no order by art_no desc limit 2;',function(err, result, fields){
+    if(admin == null){
+    res.redirect('/')
+}
+    else{
+        con.query('select * from article where status = "app" order by art_no desc limit 2;',function(err, result, fields){
         
-        const obj = JSON.parse(JSON.stringify(result))
-        t1 = obj[0].title
-        a1 = obj[0].stu_username
-        t2 = obj[1].title
-        a2 = obj[1].stu_username
-        
-    })
-    res.render('admin', {title1:t1, author1 : a1, title2: t2, author2 : a2})
-    if (err) throw err;
+            const obj = JSON.parse(JSON.stringify(result))
+            t1 = obj[0].title
+            a1 = obj[0].stu_username
+            txt1= obj[0].content
+            t2 = obj[1].title
+            a2 = obj[1].stu_username
+            txt2= obj[1].content
+        })
+        res.render('admin', {title1:t1, author1 : a1, title2: t2, author2 : a2})
+        if (err) throw err;
+    }
 })
 
-app.get('/templet.html', function (req, res) {
+app.get('/templet', function (req, res) {
     // console.log(typeof(txt2))
     res.render('templet', { title:t1, author: a1, data: txt1})
 })
@@ -96,7 +103,7 @@ app.post('/admin_check', function (req, res) {
         // console.log(result.length)
         if(result.length != 0){
             if (result[0].pwd == req.body.pwd){
-                student = req.body.uname
+                admin = req.body.uname
                 console.log("logged in")
                 res.redirect('/admin')
             }
@@ -111,16 +118,23 @@ app.post('/admin_check', function (req, res) {
     })
 })
 
+
+
 app.get('/student', function (req, res) {
-    con.query('select * from article where art_no order by art_no desc limit 2;',function(err, result, fields){
-        
+    if(student == "Guest"){
+        res.redirect('/')
+    }
+    else {
+        con.query('select * from article where status = "app" order by art_no desc limit 2;',function(err, result, fields){ 
         const obj = JSON.parse(JSON.stringify(result))
         t1 = obj[0].title
         a1 = obj[0].stu_username
+        txt1= obj[0].content
         t2 = obj[1].title
         a2 = obj[1].stu_username
+        txt2= obj[1].content
     })
-    res.render('student', {title1:t1, author1 : a1, title2: t2, author2 : a2})
+    res.render('student', {title1:t1, author1 : a1, title2: t2, author2 : a2})}
 })
 
 app.post('/student_check', function (req, res) {
@@ -162,7 +176,7 @@ app.post('/data', function(req, res){
 
 
 app.post('/reg', function (req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     
     const {username,pwd,contact} = req.body
     
@@ -176,4 +190,45 @@ app.post('/reg', function (req, res) {
             res.redirect('/')
         }
     })
+})
+
+
+var atn
+app.get('/approve', function (req, res){
+    if(admin == null){
+        res.redirect('/')
+    }
+    else{
+    con.query("select * from article where status = 'TBC' order by art_no asc;",function(err, result, fields){
+        console.log(result)
+        console.log(result[0])
+        console.log(result.length)
+
+        if(result.length == 0){
+            res.redirect('/admin')
+        }
+        else{
+            const obj = JSON.parse(JSON.stringify(result))
+            t1 = obj[0].title
+            a1 = obj[0].stu_username
+            txt1= obj[0].content
+            atn = obj[0].art_no
+            res.render('check',{title:t1,author:a1,data:txt1})
+        }
+        })
+        // console.log(atn)
+
+        
+    }
+})
+
+app.post('/update', function (req, res){
+    if(req.body.status == "app"){
+        con.query("update article set status = 'app' where art_no = ?",[atn],function(err){})
+    }
+    else if(req.body.status == "dis"){
+        con.query("delete from article where art_no = ?", [atn],function(err){})
+    }
+    res.redirect('/approve')
+
 })

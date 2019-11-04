@@ -50,8 +50,19 @@
 </style>
 </head>
 <body>
+    <div>
         <div class="top "><img src='/images/logotry.png' class="logo">   <div class="text">IIITK Magazine Portal</div></div>
         <div class="head1"><h1><%= title %></h1></div>
         <div class="head2"><h2>By- <%= author %> </h2></div>
         <div class="body1"><p> <%= data %> </p></div>
+        <div style="float: right;">
+        <form action="update" method="POST">
+                <input type="radio" name="status" value="app" checked> Approved
+                <input type="radio" name="status" value="dis"> Reject
+                <input type="submit">
+            </form>
+        </div>
+    </div>
+
+
 </body>

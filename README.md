@@ -5,11 +5,11 @@ Instructor:-
 Created by:-
     Aayush Sahay
     Mayank Badjatiya
-    Isha
-    Shakshi
+    Isha Kumar
+    Sakshi Kummari
 
 Famework:-
-    NodeJS
+    NodeJS: "^1.0.0"
 
 Dependencies:-
     "body-parser": "^1.19.0",
